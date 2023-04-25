@@ -7,11 +7,11 @@ def index(request):
 
 
 def analyze(request):
-    data = request.GET.get('text', 'default')
-    removepunc = request.GET.get('removepunc', 'off')
-    fullcaps = request.GET.get('fullcaps', 'off')
-    newlineremover = request.GET.get('newlineremover', 'off')
-    extraspaceremover = request.GET.get('extraspaceremover', 'off')
+    data = request.POST.get('text', 'default')
+    removepunc = request.POST.get('removepunc', 'off')
+    fullcaps = request.POST.get('fullcaps', 'off')
+    newlineremover = request.POST.get('newlineremover', 'off')
+    extraspaceremover = request.POST.get('extraspaceremover', 'off')
 
     op = data
     purpose = ""
@@ -35,7 +35,7 @@ def analyze(request):
     if newlineremover == "on":
         tempStr = ""
         for i in op:
-            if i != '\n':
+            if i != '\n' and i != "\r":
                 tempStr += i
 
         params = {'purpose': 'New Line remove', 'answer': tempStr}
